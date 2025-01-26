@@ -1,0 +1,20 @@
+{
+  "name": "orca-const-2-site",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "node src/build.js",
+    "serve": "npx http-server dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "A simple static site with Markdown support",
+  "dependencies": {
+    "marked": "^11.0.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
