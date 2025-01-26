@@ -65,16 +65,23 @@ async function build() {
 
         // Process blog posts
         const blogDir = path.join(__dirname, 'blog');
-        const blogFiles = await fs.readdir(blogDir);
-        for (const file of blogFiles) {
-            if (file.endsWith('.md')) {
-                const outputPath = path.join(distDir, 'blog', file.replace('.md', '.html'));
-                await convertMarkdownFile(path.join(blogDir, file), template, outputPath);
+        try {
+            const blogFiles = await fs.readdir(blogDir);
+            for (const file of blogFiles) {
+                if (file.endsWith('.md')) {
+                    const outputPath = path.join(distDir, 'blog', file.replace('.md', '.html'));
+                    await convertMarkdownFile(path.join(blogDir, file), template, outputPath);
+                }
             }
+        } catch (error) {
+            console.log('No blog directory found, skipping blog posts');
         }
 
         // Copy static assets
         await copyStaticAssets();
+        
+        // Create a .nojekyll file to prevent GitHub Pages from processing the site with Jekyll
+        await fs.writeFile(path.join(distDir, '.nojekyll'), '');
         
         console.log('Build completed successfully!');
     } catch (error) {
