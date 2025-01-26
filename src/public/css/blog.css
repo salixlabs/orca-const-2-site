@@ -236,6 +236,7 @@
 .blog-card h2 a:hover {
     background: var(--text-gradient);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 

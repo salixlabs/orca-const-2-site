@@ -65,6 +65,7 @@ nav {
 .nav-links a:hover {
     background: var(--text-gradient);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -89,6 +90,7 @@ h1 {
 .gradient-text {
     background: var(--text-gradient);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
