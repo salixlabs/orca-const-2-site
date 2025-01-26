@@ -50,7 +50,7 @@ async function convertMarkdownFile(filePath, template, outputPath, isPost = fals
     
     if (isPost) {
         const metadata = extractMetadata(markdown);
-        const url = `${baseUrl}${outputPath.replace(path.join(__dirname, '..', 'dist'), '')}`;
+        const url = `${baseUrl}${outputPath.replace(path.join(__dirname, '..', 'docs'), '')}`;
         
         // Remove the title from content
         const contentWithoutTitle = markdown.replace(/^#\s+(.+)\n/, '');
@@ -104,7 +104,7 @@ async function convertMarkdownFile(filePath, template, outputPath, isPost = fals
 // Function to copy static assets
 async function copyStaticAssets() {
     const publicDir = path.join(__dirname, 'public');
-    const outputDir = path.join(__dirname, '..', 'dist');
+    const outputDir = path.join(__dirname, '..', 'docs');
     
     await fs.mkdir(outputDir, { recursive: true });
     await fs.cp(publicDir, path.join(outputDir), { recursive: true });
@@ -128,7 +128,7 @@ async function generateBlogIndex(posts, template) {
         `).join('');
 
     const indexContent = template.replace('<!-- Blog posts will be dynamically inserted here by the build script -->', blogList);
-    await fs.writeFile(path.join(__dirname, '..', 'dist', 'blog.html'), indexContent);
+    await fs.writeFile(path.join(__dirname, '..', 'docs', 'blog.html'), indexContent);
 }
 
 // Main build function
@@ -137,9 +137,9 @@ async function build() {
         const baseTemplate = await readTemplate('base');
         const blogTemplate = await readTemplate('blog');
         
-        // Create dist directory
-        const distDir = path.join(__dirname, '..', 'dist');
-        await fs.mkdir(distDir, { recursive: true });
+        // Create docs directory
+        const docsDir = path.join(__dirname, '..', 'docs');
+        await fs.mkdir(docsDir, { recursive: true });
 
         // Process pages directory
         const pagesDir = path.join(__dirname, 'pages');
@@ -147,7 +147,7 @@ async function build() {
         
         for (const file of pageFiles) {
             const sourcePath = path.join(pagesDir, file);
-            const outputPath = path.join(distDir, file);
+            const outputPath = path.join(docsDir, file);
             
             if (file.endsWith('.html')) {
                 // Copy HTML files directly
@@ -158,7 +158,7 @@ async function build() {
                 await convertMarkdownFile(
                     sourcePath,
                     baseTemplate,
-                    path.join(distDir, file.replace('.md', '.html'))
+                    path.join(docsDir, file.replace('.md', '.html'))
                 );
             }
         }
@@ -166,13 +166,13 @@ async function build() {
         // Process blog posts
         const blogDir = path.join(__dirname, 'blog');
         const posts = [];
-        const baseUrl = '/Orca-Const-2-Site'; // Update for GitHub Pages
+        const baseUrl = ''; // Remove the baseUrl prefix since we're serving from root
         
         try {
             const blogFiles = await fs.readdir(blogDir);
             for (const file of blogFiles) {
                 if (file.endsWith('.md')) {
-                    const outputPath = path.join(distDir, 'blog', file.replace('.md', '.html'));
+                    const outputPath = path.join(docsDir, 'blog', file.replace('.md', '.html'));
                     const metadata = await convertMarkdownFile(
                         path.join(blogDir, file),
                         blogTemplate,
@@ -202,7 +202,7 @@ async function build() {
         await copyStaticAssets();
         
         // Create a .nojekyll file to prevent GitHub Pages from processing the site with Jekyll
-        await fs.writeFile(path.join(distDir, '.nojekyll'), '');
+        await fs.writeFile(path.join(docsDir, '.nojekyll'), '');
         
         console.log('Build completed successfully!');
     } catch (error) {
