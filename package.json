@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "build": "node src/build.js",
-    "serve": "npx http-server dist"
+    "serve": "npx http-server dist -p 8080"
   },
   "keywords": [],
   "author": "",

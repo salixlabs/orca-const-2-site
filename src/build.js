@@ -43,10 +43,20 @@ async function build() {
         const distDir = path.join(__dirname, '..', 'dist');
         await fs.mkdir(distDir, { recursive: true });
 
-        // Process pages
+        // Copy index.html directly if it exists
+        const indexHtmlPath = path.join(__dirname, 'pages/index.html');
+        try {
+            const indexHtml = await fs.readFile(indexHtmlPath, 'utf-8');
+            await fs.writeFile(path.join(distDir, 'index.html'), indexHtml);
+        } catch (error) {
+            console.log('No custom index.html found, will use index.md if it exists');
+        }
+
+        // Process other pages
         const pagesDir = path.join(__dirname, 'pages');
         const pageFiles = await fs.readdir(pagesDir);
         for (const file of pageFiles) {
+            if (file === 'index.html') continue; // Skip index.html as it's already handled
             if (file.endsWith('.md')) {
                 const outputPath = path.join(distDir, file.replace('.md', '.html'));
                 await convertMarkdownFile(path.join(pagesDir, file), template, outputPath);
