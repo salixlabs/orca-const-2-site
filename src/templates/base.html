@@ -3,30 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <title>{{title}} - Orca Construction</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/blog.css">
 </head>
 <body>
     <header>
         <nav>
-            <a href="/" class="logo">Your Site</a>
+            <a href="./index.html" class="logo">
+                <img src="./images/logo.svg" alt="Orca Construction Logo">
+                Orca Construction
+            </a>
             <div class="nav-links">
-                <a href="/">Home</a>
-                <a href="/blog">Blog</a>
-                <a href="/about">About</a>
-                <a href="/faq">FAQ</a>
+                <a href="./blog.html">Blog</a>
+                <a href="./trades.html">Trades</a>
+                <a href="./contact.html">Contact</a>
             </div>
         </nav>
     </header>
 
     <main>
-        {{content}}
+        <article class="content-page">
+            <header class="page-header">
+                <h1>{{title}}</h1>
+            </header>
+            
+            <div class="page-content">
+                {{content}}
+            </div>
+        </article>
     </main>
 
     <footer>
-        <p>&copy; 2024 Your Site. All rights reserved.</p>
+        <p>&copy; 2024 Orca Construction. All rights reserved.</p>
     </footer>
 
-    <script src="/js/main.js"></script>
+    <script src="./js/main.js"></script>
 </body>
 </html> 

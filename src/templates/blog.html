@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}} - Orca Construction Blog</title>
+    <link rel="stylesheet" href="{{baseUrl}}/css/style.css">
+    <link rel="stylesheet" href="{{baseUrl}}/css/blog.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav>
+            <a href="{{baseUrl}}/index.html" class="logo">
+                <img src="{{baseUrl}}/images/logo.svg" alt="Orca Construction Logo">
+                Orca Construction
+            </a>
+            <div class="nav-links">
+                <a href="{{baseUrl}}/blog.html">Blog</a>
+                <a href="{{baseUrl}}/trades.html">Trades</a>
+                <a href="{{baseUrl}}/contact.html">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <article class="blog-post">
+            <h1>{{title}}</h1>
+            <div class="blog-meta">
+                Posted on <time datetime="{{date}}">{{date}}</time> by <span class="author">{{author}}</span>
+            </div>
+            
+            <div class="blog-content">
+                {{content}}
+            </div>
+
+            <!-- ConvertKit Form -->
+            <div class="convertkit-form">
+                <h3>Stay Updated</h3>
+                <p>Get the latest construction tips and industry insights delivered to your inbox.</p>
+                {{> convertkit}}
+                <p class="privacy-note">We respect your privacy. Unsubscribe at any time.</p>
+            </div>
+
+            <footer class="blog-footer">
+                <div class="blog-tags">
+                    {{#if tags}}
+                    <div class="tags">
+                        {{#each tags}}
+                        <span class="tag">{{this}}</span>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                </div>
+                <div class="blog-share">
+                    <p>Share this article:</p>
+                    <div class="share-buttons">
+                        <a href="https://twitter.com/intent/tweet?text={{title}}&url=https://salixlabs.github.io{{url}}" target="_blank" rel="noopener noreferrer">Twitter</a>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://salixlabs.github.io{{url}}&title={{title}}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                        <a href="mailto:?subject={{title}}&body=Check out this article: https://salixlabs.github.io{{url}}" target="_blank" rel="noopener noreferrer">Email</a>
+                    </div>
+                </div>
+            </footer>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Orca Construction. All rights reserved.</p>
+    </footer>
+
+    <script src="{{baseUrl}}/js/main.js"></script>
+</body>
+</html> 

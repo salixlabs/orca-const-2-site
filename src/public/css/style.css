@@ -2,6 +2,8 @@
     --navy: #0A0F2C;
     --primary-gradient: linear-gradient(90deg, #0066FF, #00D2FF);
     --text-gradient: linear-gradient(90deg, #0066FF 0%, #00D2FF 100%);
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --card-hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 * {
@@ -17,7 +19,7 @@ body {
     background-color: #ffffff;
 }
 
-header {
+.site-header {
     padding: 1.5rem;
     background-color: #ffffff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -37,6 +39,8 @@ nav {
     gap: 0.5rem;
     font-weight: 600;
     font-size: 1.25rem;
+    color: var(--navy);
+    text-decoration: none;
 }
 
 .logo img {
@@ -52,6 +56,7 @@ nav {
     color: var(--navy);
     text-decoration: none;
     font-weight: 500;
+    transition: color 0.2s;
 }
 
 .nav-links a:hover {
@@ -75,6 +80,7 @@ h1 {
     font-size: 3.5rem;
     line-height: 1.2;
     margin-bottom: 2rem;
+    color: var(--navy);
 }
 
 .gradient-text {
@@ -115,9 +121,94 @@ h1 {
     color: var(--navy);
 }
 
+/* Trades Page Styles */
+.trades-header {
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
+.section-subtitle {
+    font-size: 1.25rem;
+    color: #4A5568;
+    margin-top: 1rem;
+}
+
+.trades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.trade-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.trade-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-hover-shadow);
+}
+
+.trade-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.trade-card h3 {
+    color: var(--navy);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.trade-card p {
+    color: #4A5568;
+    margin-bottom: 1.5rem;
+}
+
+.trade-link {
+    color: #0066FF;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    transition: transform 0.2s;
+}
+
+.trade-link:hover {
+    transform: translateX(5px);
+}
+
 footer {
     text-align: center;
     padding: 2rem;
     color: #6B7280;
     border-top: 1px solid #e5e7eb;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+    }
+
+    .stats {
+        font-size: 2rem;
+    }
+
+    .trades-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-links {
+        gap: 1.5rem;
+    }
 } 
